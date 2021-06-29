@@ -2,6 +2,54 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
+			"label": "build-api",
+			"type": "process",
+			"command": "dotnet",
+			"args": [
+				"build",
+				"${workspaceFolder}/api/api.csproj"
+			],
+			"problemMatcher": ["$tsc"],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+		{
+			"label": "watch api",
+			"type": "process",
+			"command": "dotnet",
+			"args": [
+				"watch",
+				"run"
+			],
+			"options":{
+				"cwd": "${workspaceFolder}/api"
+			},
+			"problemMatcher": ["$tsc"]
+		},
+		{
+			"type": "process",
+			"label": "watch app",
+			"presentation": {
+				"echo": true,
+				"reveal": "silent",
+				"focus": true,
+				"panel": "shared",
+				"showReuseMessage": true,
+				"clear": false
+			},
+			"command": "yarn",
+			"options": {
+				"cwd": "${workspaceFolder}/app"
+			},
+			"args": [
+				"run",
+				"start"
+			],
+			"problemMatcher": []
+		},
+		{
 			"type": "docker-build",
 			"label": "docker-build-api",
 			"dockerBuild": {

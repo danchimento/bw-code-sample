@@ -1,12 +1,26 @@
 {
     "configurations": [
         {
-            "name": "Docker .NET Core Launch",
-            "type": "docker",
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach",
+            "processName": "api"
+        },
+        {
+            "name": ".NET Core Launch (web)",
+            "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "docker-run: debug",
-            "netCore": {
-                "appProject": "${workspaceFolder}/api/api.csproj"
+            "preLaunchTask": "build-api",
+            "program": "${workspaceFolder}/api/bin/Debug/net5.0/api.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
             }
         }
     ]

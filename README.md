@@ -3,11 +3,12 @@
 1. Clone the repo from github
 ```
 $ git clone https://github.com/danchimento/bw-code-sample
-$ cd bw-code-sample
-$ docker compose up
 ```
 
-2. Launch the following URLs in your browser to see the app in action
+2. Open the directory in VS Code
+3. Run the task `watch-api`
+4. Run the task `watch-app`
+5. Launch the following URLs to see the results
 http://localhost:5000/ExchangeRates
 http://localhost:3000
 
