@@ -35,7 +35,6 @@ namespace api.Controllers
 
             var results = new List<ExchangeRate> {
                 rates.bpi.USD,
-                rates.bpi.GBP,
                 rates.bpi.EUR,
             };
 

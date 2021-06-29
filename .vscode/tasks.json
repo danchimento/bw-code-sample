@@ -2,64 +2,34 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"label": "echo",
+			"type": "docker-build",
+			"label": "docker-build-api",
+			"dockerBuild": {
+				"tag": "bw-code-sample-api:latest",
+				"dockerfile": "${workspaceFolder}/api/Dockerfile",
+				"context": "${workspaceFolder}/api",
+				"pull": true
+			},
+			"netCore": {
+				"appProject": "${workspaceFolder}/api/api.csproj"
+			}
+		},
+		{
 			"type": "shell",
-			"command": "echo Hello"
-		},
-		{
-			"type": "docker-build",
-			"label": "docker-build: debug",
-			"dependsOn": [
-				"build"
-			],
-			"dockerBuild": {
-				"tag": "bwcodesample:dev",
-				"dockerfile": "${workspaceFolder}/api/Dockerfile",
-				"context": "${workspaceFolder}/api",
-				"pull": true
+			"label": "compose-up-api",
+			"presentation": {
+				"echo": true,
+				"reveal": "silent",
+				"focus": true,
+				"panel": "shared",
+				"showReuseMessage": true,
+				"clear": false
 			},
-			"netCore": {
-				"appProject": "${workspaceFolder}/api/api.csproj"
-			}
-		},
-		{
-			"type": "docker-build",
-			"label": "docker-build: release",
 			"dependsOn": [
-				"build"
+				"docker-build-api"
 			],
-			"dockerBuild": {
-				"tag": "bwcodesample:latest",
-				"dockerfile": "${workspaceFolder}/api/Dockerfile",
-				"context": "${workspaceFolder}/api",
-				"pull": true
-			},
-			"netCore": {
-				"appProject": "${workspaceFolder}/api/api.csproj"
-			}
-		},
-		{
-			"type": "docker-run",
-			"label": "docker-run: debug",
-			"dependsOn": [
-				"docker-build: debug"
-			],
-			"dockerRun": {},
-			"netCore": {
-				"appProject": "${workspaceFolder}/api/api.csproj",
-				"enableDebugging": true
-			}
-		},
-		{
-			"type": "docker-run",
-			"label": "docker-run: release",
-			"dependsOn": [
-				"docker-build: release"
-			],
-			"dockerRun": {},
-			"netCore": {
-				"appProject": "${workspaceFolder}/api/api.csproj"
-			}
+			"command": "docker compose up api -d",
+			"problemMatcher": []
 		}
 	]
 }
