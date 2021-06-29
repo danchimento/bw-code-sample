@@ -15,11 +15,6 @@ namespace api.Controllers
     {
         private static readonly HttpClient client = new HttpClient();
 
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
         private readonly ILogger<ExchangeRateController> _logger;
 
         public ExchangeRateController(ILogger<ExchangeRateController> logger)
