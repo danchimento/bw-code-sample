@@ -2,6 +2,7 @@ version: "3.4"
 services:
   api:
     image: bw-code-sample-api
+    container_name: bw-code-sample-api
     build: api
     environment:
       NODE_ENV: development
@@ -9,15 +10,13 @@ services:
       - 5000:5000
     command: dotnet api.dll
   app:
-    image: bw-code-sample-app
-    build: app
+    image: node:alpine
+    container_name: bw-code-sample-app
     volumes:
-      - type: bind
-        source: ./app
-        target: /app
+      - ./app:/app
     environment:
       NODE_ENV: development
     ports:
       - 3000:3000
-      - 9229:9229
+    working_dir: '/app'
     command: yarn start
