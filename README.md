@@ -40,3 +40,13 @@ and the user experience was acceptable. I defined these requirements as
 2. Use a React web app and a .NET 5 API
 3. Ensure setup is easy for the team evaluating the code
 4. BONUS: Experiment with some new tech (remote containers)
+
+# Testing
+
+To test error handling, update the URL in the appsettings.json file to something broken.
+
+<br />
+
+# Known Issues
+
+When the "Refresh" button is pressed, it pulls new data from the API but if the exchange rates haven't changed, the count-up animation doesn't run. The `redraw` property on the `CountUp` component should handle this according to [the documentation](https://www.npmjs.com/package/react-countup#redraw-boolean) but it doesn't work.

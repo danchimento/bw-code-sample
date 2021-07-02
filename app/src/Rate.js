@@ -8,7 +8,7 @@ export const Rate = ({ rate }) => {
   return (
     <div className="rate">
       <div className="val">
-        <CountUp decimals={4} end={val} duration={2} separator=',' useEasing={true} />
+        <CountUp redraw={true} decimals={4} end={val} duration={2} separator=',' useEasing={true} />
       </div>
       <div className="code">{rate.code}</div>
     </div>

@@ -4,11 +4,11 @@ html, body {
   background-color: #D16666;
   color: white;
   min-width: 450px;
+  text-align: center;
 }
 
 header {
   font-size: 3em;
-  text-align: center;
   font-weight: bold;
   padding: 2rem 0;
 }
@@ -33,9 +33,8 @@ header {
 }
 
 .error {
-  text-align: center;
   width: 400px;
-  margin: 0 auto;
+  margin: 0 auto 2rem auto;
   background: #565554;
   padding: 1rem;
   border-radius: 1rem;

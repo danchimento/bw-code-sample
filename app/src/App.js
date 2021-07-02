@@ -10,10 +10,11 @@ function App() {
   const fetchRates = () => {
     GetExchangeRates()
       .then((result) => {
-        setRates(result);
+        setRates([...result]);
         setError(null);
       })
       .catch((err) => {
+        setRates([])
         setError("Error getting rates");
       });
   }
@@ -23,13 +24,11 @@ function App() {
       return (<div className='error'>
         <p className='error-text'>{error}</p>
         <p>If the problem persists, please don't contact us.</p>
-        <button onClick={fetchRates} type='button' className='btn btn-dark btn-lg'>Try Again</button>
       </div>)
     }
   }
-
   
-  if (!rates.length) {
+  if (!rates.length && !error) {
     fetchRates();
   }
 
@@ -44,6 +43,8 @@ function App() {
         <Rate key={i} rate={r} />
       ))}
 
+      <button onClick={fetchRates} className='btn btn-light'>Refresh</button>
+        
     </div>
   );
 }
