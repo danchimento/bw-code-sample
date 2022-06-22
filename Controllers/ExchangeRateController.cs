@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace api.Controllers
@@ -14,21 +12,13 @@ namespace api.Controllers
     [Route("[controller]")]
     public class ExchangeRateController : ControllerBase
     {
-        const string HTTP_CLIENT_NAME = "EXCHANGE_RATE_CLIENT";
-        const string EXCHANGE_RATE_URL_SETTING = "ExchangeRates:Url";
-
         private readonly ILogger<ExchangeRateController> _logger;
         private readonly HttpClient _httpClient;
-        private readonly IConfiguration _config;
 
-        public ExchangeRateController(
-            ILogger<ExchangeRateController> logger, 
-            IHttpClientFactory httpClientFactory,
-            IConfiguration configuration)
+        public ExchangeRateController(ILogger<ExchangeRateController> logger)
         {
             _logger = logger;
-            _httpClient = httpClientFactory.CreateClient(HTTP_CLIENT_NAME);
-            _config = configuration;
+            _httpClient = new HttpClient();
         }
 
         /// <summary>
@@ -44,8 +34,7 @@ namespace api.Controllers
         [HttpGet]
         public async Task<IEnumerable<ExchangeRate>> Get()
         {
-            var url = _config[EXCHANGE_RATE_URL_SETTING];
-            var streamTask = _httpClient.GetStreamAsync(url);
+            var streamTask = _httpClient.GetStreamAsync("https://api.coindesk.com/v1/bpi/currentprice.json");
             var rates = await JsonSerializer.DeserializeAsync<ExchangeRatesResponse>(await streamTask);
 
             // The result from the API are in the format:
