@@ -17,7 +17,6 @@ namespace api.Controllers
         public ExchangeRateController(ILogger<ExchangeRateController> logger)
         {
             _logger = logger;
-            _httpClient = new HttpClient();
         }
     }
 }
